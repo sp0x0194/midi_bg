@@ -1,0 +1,54 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Layouts;
+
+public class Beats : MonoBehaviour
+{
+    public List<Beat> beatCubes;
+
+    void Start()
+    {
+        InputSystem.onDeviceChange += (device, change) =>
+        {
+            if (!Application.isPlaying) return;
+            if (change != InputDeviceChange.Added) return;
+
+            var midiDevice = device as Minis.MidiDevice;
+            if (midiDevice == null) return;
+
+            midiDevice.onWillNoteOn += (note, velocity) => {
+                for (var i = 0; i < beatCubes.Count; ++i)
+                {
+                    if (midiDevice.channel == beatCubes[i].channel && beatCubes[i].note == note.noteNumber)
+                    {
+                        beatCubes[i].cube.PlayOneShot();
+                    }
+                }
+            };
+
+            midiDevice.onWillNoteOff += (note) => {
+            };
+        };
+    }
+}
+
+[Serializable]
+public class Beat
+{
+    public int channel;
+    public int note;
+    public BeatCube cube;
+}
+
+/*
+Inst            Tx Note Number / Rx Note Number
+BASS DRUM       36 / 35, 36
+SNARE DRUM      38 / 38, 40
+HAND CLAP       50 / 48, 50
+TOM             47 / 45, 47
+CLOSED HIHAT    42 / 42, 44
+OPEN HIHAT      46 / 46
+ */
