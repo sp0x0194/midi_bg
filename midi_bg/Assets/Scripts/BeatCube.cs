@@ -18,6 +18,7 @@ public class BeatCube : MonoBehaviour
 
     public void PlayOneShot()
     {
+        if (!Application.isPlaying) return;
         if (_t != null) _t.Kill();
         transform.localScale = from;
         _t = transform.DOScale(to, releaseDuration).SetEase(Ease.OutCubic);
