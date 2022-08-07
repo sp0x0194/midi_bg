@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Unity.Mathematics;
 using Lasp;
 
@@ -24,6 +25,10 @@ public class SpectrumRenderer : MonoBehaviour
 
     void Update()
     {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            _lineRenderer.enabled = true;
+        }
         for (var i = 0; i < _spectrumAnalyzer.resolution; ++i)
         {
             if (float.IsNaN(_spectrumAnalyzer.spectrumArray[i])) return;

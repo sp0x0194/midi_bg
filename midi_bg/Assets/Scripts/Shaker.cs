@@ -45,6 +45,11 @@ public class Shaker : MonoBehaviour
         };
     }
 
+    void Update()
+    {
+        shakeTarget.gameObject.SetActive(shakeTarget.localScale != defaultScale);
+    }
+
     public void PlayOneShot()
     {
         if (!Application.isPlaying) return;
