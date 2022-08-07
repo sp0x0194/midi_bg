@@ -48,10 +48,8 @@ public class Shaker : MonoBehaviour
     public void PlayOneShot()
     {
         if (!Application.isPlaying) return;
-        Debug.Log("play one shot");
         shakeTarget.localScale = targetScale;
         shakeTarget.DOScale(defaultScale, duration).SetEase(Ease.InQuart);
-        // shakeTarget.DOShakeRotation(duration, new Vector3(0f, 0f, 45f), 1, 90);
         shakeTarget.DOShakePosition(duration, new Vector3(0.2f, 0.2f, 0f), v, r);
     }
 }
