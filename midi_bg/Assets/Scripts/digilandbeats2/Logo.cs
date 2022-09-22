@@ -20,7 +20,7 @@ public class Logo : MonoBehaviour
         {
             Reset();
         }
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current.backspaceKey.wasPressedThisFrame)
         {
             Play();
         }

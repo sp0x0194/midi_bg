@@ -16,7 +16,7 @@ public class BeatCube : MonoBehaviour
         transform.localScale = to;
     }
 
-    public void PlayOneShot()
+    public virtual void PlayOneShot()
     {
         if (!Application.isPlaying) return;
         if (_t != null) _t.Kill();
